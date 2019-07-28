@@ -11,9 +11,9 @@ $image = 'img/1.jpg';
     <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
-<div class="img" style="background-image: url(<?= $image; ?>)">
+<div class="img" style="background-image: url(<?php echo $image; ?>)">
     <div class="greeting">
-        <h1><?= $text; ?></h1>
+        <h1><?php echo $text; ?></h1>
     </div>
 </div>
 </body>
