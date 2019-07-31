@@ -6,8 +6,9 @@ function generate($rows, $placesPerRow, $avaliableCount){
     }
 
     $map = [];
-    for ($i = 1; $i <= $rows; $i++) {
-        for ($j = 1; $j <= $$placesPerRow; $j++) {
+    for ($i = 1; $i < $rows; $i++) {
+        $map[$i] = array();
+        for ($j = 1; $j < $$placesPerRow; $j++) {
             $map[$i][$j] = false;
         }
     }
