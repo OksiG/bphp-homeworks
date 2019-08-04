@@ -18,7 +18,7 @@ switch ($dayWeekend) :
 if ($hour >= 6 && $hour < 11) {
     $image = "img/goodmorning.jpg";
     $text = "Доброе утро! Сегодня $dayWeekend.";
-} elseif ($hour >= 10 && $hour < 18) {
+} elseif ($hour >= 11 && $hour < 18) {
     $image = "img/goodday.jpg";
     $text = "Добрый день! Сегодня $dayWeekend.";
 } elseif ($hour >= 18 && $hour < 23) {

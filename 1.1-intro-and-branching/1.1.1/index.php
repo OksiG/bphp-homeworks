@@ -1,18 +1,18 @@
 <?php
-$variable = 1;
+$variable = "h";
 
 if (is_bool($variable)) {
-    echo "$variable is bool";
+    $type = "$variable is bool";
 } elseif (is_float($variable)) {
-    echo "$variable is float";
+    $type =  "$variable is float";
 } elseif (is_int($variable)) {
-    echo "$variable is int";
+    $type =  "$variable is int";
 } elseif (is_string($variable)) {
-    echo "$variable is string";
+    $type =  "$variable is string";
 } elseif (is_null($variable)) {
-    echo "$variable is null";
+    $type =  "$variable is null";
 } else {
-    echo "$variable is other";
+    $type =  "$variable is other";
 };
 
 ?>
