@@ -7,7 +7,7 @@ function generate($rows, $placesPerRow, $chairs){
 
     $map = [];
     for ($i = 0; $i < $rows; $i++) {
-        for ($j = 0; $j < $$placesPerRow; $j++) {
+        for ($j = 0; $j < $placesPerRow; $j++) {
             $map[$i][$j] = false;
         }
     }
