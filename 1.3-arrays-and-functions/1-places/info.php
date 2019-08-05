@@ -1,23 +1,24 @@
 <?php
 
-function generate($rows, $placesPerRow, $avaliableCount){
-    if ($rows * $placesPerRow > $avaliableCount) {
+function generate($rows, $placesPerRow, $chairs){
+    if ($rows * $placesPerRow > $chairs) {
         return false;
     }
 
     $map = [];
-    for ($i = 1; $i < $rows; $i++) {
-        $map[$i] = array();
-        for ($j = 1; $j < $$placesPerRow; $j++) {
+    for ($i = 0; $i < $rows; $i++) {
+        for ($j = 0; $j < $$placesPerRow; $j++) {
             $map[$i][$j] = false;
         }
     }
     return $map;
 }
 
-function reserve($map, $row, $place){
-    if ($map[$row+1][$place+1] === false) {
-        return $map[$row+1][$place+1] = true;
+function reserve($map, $requiredRow, $requiredPlace){
+    if ($map[$requiredRow-1][$requiredPlace-1] === false) {
+        global $map;
+        $map[$requiredRow-1][$requiredPlace-1] = true;
+        return true;
     } else {
         return false;
     }
