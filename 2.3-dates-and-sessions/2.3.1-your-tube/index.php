@@ -29,7 +29,13 @@
      */
     function shouldBeIncremented(): bool
     {
-        //write your code here
+        $nowTime = time();
+        if ($nowTime - $_COOKIE['time'] >= 300000) {
+            incrementViews(getViews());
+            return true;
+        } else {
+            return false;
+        }
     }
 
     //
