@@ -1,5 +1,5 @@
 <?php
-$uploaddir = '/uploads/';
+$uploaddir = './uploads/';
 $uploadfile = $uploaddir . basename($_FILES['userfile']['name']);
 
 echo '<pre>';
@@ -11,7 +11,7 @@ if (move_uploaded_file($_FILES['userfile']['tmp_name'], $uploadfile)) {
 
 print "</pre>";
 
-if (exif_imagetype('name') === IMAGETYPE_GIF || IMAGETYPE_JPEG  || IMAGETYPE_PNG) {
+if ((exif_imagetype($_FILES['userfile']['name']) == IMAGETYPE_GIF) || (exif_imagetype($_FILES['userfile']['name']) == IMAGETYPE_JPEG)  || (exif_imagetype($_FILES['userfile']['name']) == IMAGETYPE_PNG)) {
     $files = scandir($uploaddir);
 } else {
     echo 'Файл не является картинкой!';
@@ -22,7 +22,7 @@ if (exif_imagetype('name') === IMAGETYPE_GIF || IMAGETYPE_JPEG  || IMAGETYPE_PNG
 <!-- Тип кодирования данных, enctype, ДОЛЖЕН БЫТЬ указан ИМЕННО так -->
 <form enctype="multipart/form-data" action="index.php" method="POST">
     <!-- Поле MAX_FILE_SIZE должно быть указано до поля загрузки файла -->
-    <input type="hidden" name="MAX_FILE_SIZE" value="30000" />
+    <input type="hidden" name="MAX_FILE_SIZE" />
     <!-- Название элемента input определяет имя в массиве $_FILES -->
     Отправить этот файл: <input name="userfile" type="file" />
     <input type="submit" value="Отправить файл" />
