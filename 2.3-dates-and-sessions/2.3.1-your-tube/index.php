@@ -29,8 +29,9 @@
      */
     function shouldBeIncremented(): bool
     {
+        $timeStamp = $_COOKIE['time'] ?? 0;
         $nowTime = time();
-        if ($nowTime - $_COOKIE['time'] >= 300000) {
+        if ($nowTime - $timeStamp >= 300000) {
             incrementViews(getViews());
             return true;
         } else {
