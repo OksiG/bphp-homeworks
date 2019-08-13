@@ -17,12 +17,19 @@ if ((exif_imagetype($_FILES['userfile']['name']) == IMAGETYPE_GIF) || (exif_imag
     echo 'Файл не является картинкой!';
 }
 
+$images = scandir($uploaddir);
+foreach ($images as $image) {
+    if($image === '.' || $image === '..')
+        continue;
+    echo '<img src="'.$uploaddir.$image.'"><br>';
+}
+
 ?>
 
 <!-- Тип кодирования данных, enctype, ДОЛЖЕН БЫТЬ указан ИМЕННО так -->
 <form enctype="multipart/form-data" action="index.php" method="POST">
     <!-- Поле MAX_FILE_SIZE должно быть указано до поля загрузки файла -->
-    <input type="hidden" name="MAX_FILE_SIZE" />
+
     <!-- Название элемента input определяет имя в массиве $_FILES -->
     Отправить этот файл: <input name="userfile" type="file" />
     <input type="submit" value="Отправить файл" />
