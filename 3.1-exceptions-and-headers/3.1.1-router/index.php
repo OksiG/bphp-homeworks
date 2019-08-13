@@ -12,7 +12,7 @@ class BadRequest extends Exception {}
 class NotFound extends Exception {}
 
 function check($availableLinks) {
-    if (!isset($_GET['page']) {
+    if (!isset($_GET['page'])) {
         throw new BadRequest();
     }
 
