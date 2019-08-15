@@ -1,7 +1,7 @@
 <?php
 /*Подключение необходимых файлов*/
-include ('autoload.php');
-include ('SystemConfig.php');
+include ('./autoload.php');
+include ('./config/SystemConfig.php');
 
 /*Создание объекта*/
 $newUser = new User;

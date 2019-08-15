@@ -7,7 +7,7 @@ class User extends DataRecordModel
     public $rate;
 
     public function addUserFromForm() {
-
+        $this->commit();
     }
 }
 ?>

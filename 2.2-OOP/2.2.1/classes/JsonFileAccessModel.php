@@ -8,8 +8,8 @@ class JsonFileAccessModel
         $this->fileName = Config::DATABASE_PATH . $fileName . '.json';
     }
 
-    private function connect() {
-        $this->file = fopen($this->fileName, 'r+');
+    private function connect($mode) {
+        $this->file = fopen($this->fileName, $mode);
 
     }
 
@@ -18,35 +18,35 @@ class JsonFileAccessModel
     }
 
     public function read() {
-        $fd = fopen($this->fileName, 'r+');
+        $this->connect('r');
         while(!feof($fd))
         {
             $str = htmlentities(fread($fd, 600));
         }
-        fclose($fd);
+        $this->disconnect();
         return $str;
     }
 
     public function write($text) {
-        $fd = fopen($this->fileName, 'w');
+        $this->connect('w');
         fwrite($fd,  $text);
-        fclose($fd);
+        $this->disconnect();
     }
 
     public function readJson() {
-        $fd = fopen($this->fileName, 'r+');
+        $this->connect('r+');
         while(!feof($fd))
         {
-            $str = htmlentities(fread($fd, 600));
+            $str = htmlentities(fgets($fd));
         }
-        fclose($fd);
+        $this->disconnect();
         $jsonFile = json_encode($str);
         return $jsonFile;
     }
 
     public function writeJson($jsonFile) {
-        $json = json_encode($jsonFile,JSON_PRETTY_PRINT);
+        $json = json_decode($jsonFile,JSON_PRETTY_PRINT);
         fwrite($this->file,  $json);
-        fclose($fd);
+        $this->disconnect();
     }
 }

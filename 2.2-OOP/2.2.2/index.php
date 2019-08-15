@@ -1,7 +1,7 @@
 <?php
 
 include ('autoload.php');
-include ('SystemConfig.php');
+include ('./config/SystemConfig.php');
 
 $test = new Users;
 $usersList = $test->newQuery()->getObjs();
