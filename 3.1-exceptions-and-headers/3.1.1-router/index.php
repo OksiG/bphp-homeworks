@@ -7,13 +7,12 @@
 $availableLinks = include './availableLinks.php';
 
 require './router.php';
-
-class BadRequest extends Exception {}
-class NotFound extends Exception {}
+require './BadRequest.php';
+require './NotFound.php';
 
 function check($availableLinks) {
     if (!isset($_GET['page'])) {
-        throw new BadRequest();
+        throw new badRequest();
     }
 
     $try = new Router($availableLinks);
@@ -28,7 +27,7 @@ function check($availableLinks) {
     try {
         echo check($availableLinks);
     }
-    catch (BadRequest $e) {
+    catch (badRequest $e) {
         echo $e->getMessage() . '<br/>';
         header('Location: error.php', true, 400);
     }
