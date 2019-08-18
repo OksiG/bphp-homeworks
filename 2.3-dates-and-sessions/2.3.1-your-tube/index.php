@@ -31,6 +31,7 @@
     {
         $timeStamp = $_COOKIE['time'] ?? 0;
         $nowTime = time();
+        setcookie('time', $nowTime);
         if ($nowTime - $timeStamp >= 300000) {
             incrementViews(getViews());
             return true;
