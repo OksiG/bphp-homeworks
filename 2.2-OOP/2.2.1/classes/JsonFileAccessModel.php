@@ -19,9 +19,9 @@ class JsonFileAccessModel
 
     public function read() {
         $this->connect('r');
-        while(!feof($fd))
+        while(!feof($this->file))
         {
-            $str = htmlentities(fread($fd, 600));
+            $str = htmlentities(fread($this->file, 600));
         }
         $this->disconnect();
         return $str;
@@ -29,15 +29,15 @@ class JsonFileAccessModel
 
     public function write($text) {
         $this->connect('w');
-        fwrite($fd,  $text);
+        fwrite($this->file,  $text);
         $this->disconnect();
     }
 
     public function readJson() {
         $this->connect('r+');
-        while(!feof($fd))
+        while(!feof($this->file))
         {
-            $str = htmlentities(fgets($fd));
+            $str = htmlentities(fgets($this->file));
         }
         $this->disconnect();
         $jsonFile = json_encode($str);
