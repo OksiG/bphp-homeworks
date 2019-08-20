@@ -8,12 +8,81 @@ $users = [
 $login = $_POST['login'];
 $password = $_POST['password'];
 
-if (array_key_exists($login, $users)) {
-    if ($users[$login] == $password) {
-        echo 'Вы успешно вошли в систему!';
-        return true;
+function checkLogin($users)
+{
+    global $login;
+    global $password;
+
+    if (array_key_exists($login, $users)) {
+        if ($users[$login] == $password) {
+            echo 'Вы успешно вошли в систему!';
+            return true;
+        } else {
+            echo 'Неверно введен пароль!';
+            return false;
+        }
+    }
+    echo 'Неверно введен логин!';
+return false;
+}
+
+function check() {
+    global $users;
+
+    if (checkLogin($users) === true) {
+        exit;
+    } else {
+        $_SESSION['login'] = $_POST['login'];
+        $_SESSION['time'] = time();
+        $_SESSION['counter'] = 1;
+        return;
     }
 }
+
+function file() {
+    $file = $_POST['login'].'.txt';
+    $userFile = fopen($file, 'a+');
+    $date = date('d.m.Y H:i:s') . "\n";
+    fwrite($userFile, $date);
+    fclose($userFile);
+}
+
+function checkBruteForce()
+    session_start();
+
+    if (count($_SESSION) == 0) {
+        check();
+        return;
+    }
+
+    if ($_SESSION['login'] === $_POST['login']) {
+
+        $_SESSION['counter']++;
+
+        if (((time() - $_SESSION['time']) <= 5) && ($_SESSION['counter'] === 2)) {
+            echo 'Слишком часто вводите пароль. Попробуйте еще раз через минуту';
+            file();
+            exit;
+        } elseif ((time() - $_SESSION['time']) < 60) {
+            $_SESSION['counter']++;
+            if ($_SESSION['counter'] >= 3) {
+                $_SESSION['counter'] = 0;
+                echo 'Слишком часто вводите пароль. Попробуйте еще раз через минуту';
+                file();
+                exit;
+            }
+        } elseif ((time() - $_SESSION['time']) > 60) {
+            $_SESSION = [];
+            check();
+            return;
+        }
+    } else {
+        check();
+        return;
+    }
+}
+
+checkBruteForce();
 
 ?>
 
