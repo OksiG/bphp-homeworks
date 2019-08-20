@@ -6,9 +6,7 @@
  */
 $availableLinks = include './availableLinks.php';
 
-require './router.php';
-require './BadRequest.php';
-require './NotFound.php';
+require './autoload.php';
 
 function check($availableLinks) {
     if (!isset($_GET['page'])) {
